@@ -15,10 +15,13 @@ public class sc_Camera_Split : MonoBehaviour
     public Camera camPlayer03;
     public Camera camPlayer04;
 
+    public GameObject camDefault;
+
 
 
     private void Start()
     {
+        numPlayers = 3;
         MakeCameras();
     }
 
@@ -64,6 +67,12 @@ public class sc_Camera_Split : MonoBehaviour
             camPlayer03.rect = new Rect(0f, 0f, 0.5f, 0.5f);    // bottom left corner
             camPlayer04.rect = new Rect(0f, 0.5f, 0.5f, 0.5f);    // bottom right corner
         }
+    }
+
+    void SwitchOffDefault()
+    {
+        camDefault = GameObject.FindGameObjectWithTag("MainCamera");
+        camDefault.GetComponent<Camera>().enabled = false;
     }
 
     void ValidateNumPlayers()
