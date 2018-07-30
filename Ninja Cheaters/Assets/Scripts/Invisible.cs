@@ -39,8 +39,8 @@ public class Invisible : MonoBehaviour {
             gameObject.GetComponent<MeshRenderer>().enabled = true;
             SetAlpha((Time.time - spawnTime) * fadeSpeed);            
         }
-        float lerp = Mathf.PingPong(Time.time, duration) /duration;
-        rend.material.Lerp(BaseMat, InvisMat, lerp);
+       // float lerp = Mathf.PingPong(Time.time, duration) /duration;
+        //rend.material.Lerp(BaseMat, InvisMat, lerp);
        
     }
 

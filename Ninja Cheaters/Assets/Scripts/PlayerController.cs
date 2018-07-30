@@ -18,8 +18,8 @@ public class PlayerController : MonoBehaviour
 
     private void Walk()
     {
-        float translation = Input.GetAxis("VerticalJoy") * walkSpeed;
-        float strafe = Input.GetAxis("HorizontalJoy") * walkSpeed;
+        float translation = Input.GetAxis("Vertical") * walkSpeed;
+        float strafe = Input.GetAxis("Horizontal") * walkSpeed;
 
         translation *= Time.deltaTime;
         strafe *= Time.deltaTime;
