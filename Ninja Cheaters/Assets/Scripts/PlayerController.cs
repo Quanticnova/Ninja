@@ -8,15 +8,17 @@ public class PlayerController : MonoBehaviour
     public float runSpeed = 5.0f;
     public float jumpForce = 10.0f;
 
+    string vertAxis, horAxis;
+
     bool isGrounded;
 
-    private GameObject player;
+    public GameObject player;
     private Rigidbody playerRb;
 
     private void Walk()
     {
-        float translation = Input.GetAxis("VerticalJoy") * walkSpeed;
-        float strafe = Input.GetAxis("HorizontalJoy") * walkSpeed;
+        float translation = Input.GetAxis(vertAxis) * walkSpeed;
+        float strafe = Input.GetAxis(horAxis) * walkSpeed;
 
         translation *= Time.deltaTime;
         strafe *= Time.deltaTime;
@@ -24,25 +26,100 @@ public class PlayerController : MonoBehaviour
         player.transform.Translate(strafe, 0, translation);
     }
 
-    private void Run()
+    void PlayerWalk()
     {
-        if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.JoystickButton6))    // L2
+        if (player.name == "Player 1(Clone)")
         {
-            walkSpeed = runSpeed;
+            vertAxis = "Player1Vertical";
+            horAxis = "Player1Horizontal";
         }
-        else
+        else if (player.name == "Player 2(Clone)")
         {
-            walkSpeed = startWalkSpeed;
+            vertAxis = "Player2Vertical";
+            horAxis = "Player2Horizontal";
+        }
+        else if (player.name == "Player 3(Clone)")
+        {
+            vertAxis = "Player3Vertical";
+            horAxis = "Player3Horizontal";
+        }
+        else if (player.name == "Player 4(Clone)")
+        {
+            vertAxis = "Player4Vertical";
+            horAxis = "Player4Horizontal";
+        }
+        Walk();
+    }
+
+
+    void PlayerRun()
+    {
+        if (player.name == "Player 1(Clone)")
+        {
+            if (Input.GetKey(KeyCode.Joystick1Button6))
+            {
+                walkSpeed = runSpeed;
+            }
+        }
+        else if (player.name == "Player 2(Clone)")
+        {
+            if (Input.GetKey(KeyCode.Joystick2Button6))
+            {
+                walkSpeed = runSpeed;
+            }
+        }
+        else if (player.name == "Player 3(Clone)")
+        {
+            if (Input.GetKey(KeyCode.Joystick3Button6))
+            {
+                walkSpeed = runSpeed;
+            }
+        }
+        else if (player.name == "Player 4(Clone)")
+        {
+            if (Input.GetKey(KeyCode.Joystick4Button6))
+            {
+                walkSpeed = runSpeed;
+            }
         }
     }
 
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton1))   // X
+        if (isGrounded)
         {
-            if (isGrounded)
+            playerRb.AddForce(new Vector3(0.00f, jumpForce, 0.00f), ForceMode.Impulse);
+        }
+    }
+
+    void PlayerJump()
+    {
+        if (player.name == "Player 1(Clone)")
+        {
+            if (Input.GetKey(KeyCode.Joystick1Button1))
             {
-                playerRb.AddForce(new Vector3(0.00f, jumpForce, 0.00f), ForceMode.Impulse);
+                Jump();
+            }
+        }
+        else if (player.name == "Player 2(Clone)")
+        {
+            if (Input.GetKey(KeyCode.Joystick2Button1))
+            {
+                Jump();
+            }
+        }
+        else if (player.name == "Player 3(Clone)")
+        {
+            if (Input.GetKey(KeyCode.Joystick3Button1))
+            {
+                Jump();
+            }
+        }
+        else if (player.name == "Player 4(Clone)")
+        {
+            if (Input.GetKey(KeyCode.Joystick4Button1))
+            {
+                Jump();
             }
         }
     }
@@ -62,14 +139,17 @@ public class PlayerController : MonoBehaviour
     {
         startWalkSpeed = walkSpeed;
 
-        player = GameObject.FindGameObjectWithTag("Player");
+       // player = GameObject.FindGameObjectWithTag("Player");
         playerRb = player.GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
-        Walk();
-        Jump();
-        Run();
+        if(SpawnPlayers.controllerCount == SpawnPlayers.playerCount)
+        {
+            PlayerWalk();
+            PlayerJump();
+            PlayerRun();
+        }
     }
 }
