@@ -7,22 +7,22 @@ public class SpawnPlayers : MonoBehaviour {
 
     GameObject selectedButton;
     public GameObject player;
-    public static int playerCount = 1, controllerCount = 1;
+    public static int playerCount = 1, maxPlayerCount = 4, controllerCount = 1;
 
     Vector3 spawnPoint = Vector3.zero;      // link to spawn script
 
     void Start ()
     {
-        selectedButton = PlayerJoin.currentButton;
+        selectedButton = MenuSelect.currentButton;
         //player = GameObject.FindGameObjectWithTag("Player");
 	}
 
     private void setPlayerName()
     {
         // click on button to execute command
-        if (PlayerJoin.currentButton && Input.GetKeyDown(KeyCode.JoystickButton1))     // X
+        if (MenuSelect.currentButton && Input.GetKeyDown(KeyCode.JoystickButton1))     // X
         {
-            if (playerCount > 0 && playerCount < 5)
+            if (playerCount > 0 && playerCount <= maxPlayerCount)
             {
                 player.name = "Player " + playerCount;
                 Instantiate(player, Vector3.zero, Quaternion.identity);
@@ -33,7 +33,7 @@ public class SpawnPlayers : MonoBehaviour {
 
     private void setControllerName()
     {
-        if (PlayerJoin.currentButton && Input.GetKeyDown(KeyCode.JoystickButton1))     // X
+        if (MenuSelect.currentButton && Input.GetKeyDown(KeyCode.JoystickButton1))     // X
         {
             if (controllerCount > 0 && controllerCount < 5)
             {

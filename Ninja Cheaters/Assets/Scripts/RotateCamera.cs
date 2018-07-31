@@ -5,7 +5,7 @@ using UnityEngine;
 public class RotateCamera : MonoBehaviour
 {
     public GameObject target;
-    private GameObject menus;
+    private GameObject[] menus;
     public float rotateSpeed = 5, height = 5; float maxRotateSpeed;
     float horizontal, vertical; // axis
 
@@ -17,7 +17,8 @@ public class RotateCamera : MonoBehaviour
         maxRotateSpeed = rotateSpeed;
 
         //target = GameObject.FindGameObjectWithTag("Player");
-        menus = GameObject.FindGameObjectWithTag("playerSelect");
+        //target = GameObject.FindGameObjectsWithTag("Player");     // assign player number to camera number
+        menus = GameObject.FindGameObjectsWithTag("playerSelect");
 
         // offset = target.transform.position - transform.position;
     }
@@ -41,13 +42,16 @@ public class RotateCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        if (!menus.activeInHierarchy)
-        {
-            transform.rotation = target.transform.rotation;
-            transform.position = new Vector3(target.transform.position.x, target.transform.position.y + height, target.transform.position.z);
+       for (int i = 0; i < menus.Length; i ++)
+       {
+            if (!menus[i].activeInHierarchy)
+            {
+                transform.rotation = target.transform.rotation;
+                transform.position = new Vector3(target.transform.position.x, target.transform.position.y + height, target.transform.position.z);
 
-            getRotation();
-            setRotation();
-        }
+                getRotation();
+                setRotation();
+            }
+       }
     }
 }
