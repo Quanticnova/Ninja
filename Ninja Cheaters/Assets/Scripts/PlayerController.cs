@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     public GameObject player;
     private Rigidbody playerRb;
 
+    private GameObject[] menus;
+
     private void Walk()
     {
         float translation = Input.GetAxis(vertAxis) * walkSpeed;
@@ -141,12 +143,21 @@ public class PlayerController : MonoBehaviour
 
        // player = GameObject.FindGameObjectWithTag("Player");
         playerRb = player.GetComponent<Rigidbody>();
+        menus = GameObject.FindGameObjectsWithTag("playerSelect");
     }
 
     private void Update()
     {
-            PlayerWalk();
-            PlayerJump();
-            PlayerRun();
+
+        for (int i = 0; i < menus.Length; i++)
+        {
+            if (!menus[i].activeInHierarchy)     // make sure player moves when menus are closed
+            {
+                PlayerWalk();
+                PlayerJump();
+                PlayerRun();
+            }
+        }
+
     }
 }

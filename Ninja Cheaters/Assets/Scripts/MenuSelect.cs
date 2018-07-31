@@ -77,25 +77,32 @@ public class MenuSelect : MonoBehaviour {
         }
     }
 
+    private void Join()
+    {
+        playersJoinBtn.gameObject.SetActive(true);
+        playersJoinBtn.Select();
+        transform.GetComponent<sc_Camera_Split>().MakeCameras();
+    }
+
     private void JoinPlayerMenu()
     {
         if (playerPanel2.activeInHierarchy)
         {
             SpawnPlayers.maxPlayerCount = 2;
-            playersJoinBtn.gameObject.SetActive(true);
-            playersJoinBtn.Select();
+            sc_Camera_Split.numPlayers = 2;
+            Join();
         }
         else if (playerPanel3.activeInHierarchy)
         {
             SpawnPlayers.maxPlayerCount = 3;
-            playersJoinBtn.gameObject.SetActive(true);
-            playersJoinBtn.Select();
+            sc_Camera_Split.numPlayers = 3;
+            Join();
         }
         else if (playerPanel4.activeInHierarchy)
         {
             SpawnPlayers.maxPlayerCount = 4;
-            playersJoinBtn.gameObject.SetActive(true);
-            playersJoinBtn.Select();
+            sc_Camera_Split.numPlayers = 4;
+            Join();
         }
         else
         {

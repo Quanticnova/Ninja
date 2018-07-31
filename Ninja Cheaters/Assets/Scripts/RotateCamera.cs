@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class RotateCamera : MonoBehaviour
 {
-    public GameObject target;
+    public static GameObject target;
     private GameObject[] menus;
-    public float rotateSpeed = 5, height = 5; float maxRotateSpeed;
-    float horizontal, vertical; // axis
+    public float rotateSpeed = 0.5f, height = 5f; float maxRotateSpeed;
+    float horizontalRotation; // axis
+
+    public string playerName;
 
     Vector3 offset;
     Quaternion rotation;
@@ -16,42 +18,58 @@ public class RotateCamera : MonoBehaviour
     {
         maxRotateSpeed = rotateSpeed;
 
-        //target = GameObject.FindGameObjectWithTag("Player");
         //target = GameObject.FindGameObjectsWithTag("Player");     // assign player number to camera number
+
         menus = GameObject.FindGameObjectsWithTag("playerSelect");
 
         // offset = target.transform.position - transform.position;
     }
 
-    void getRotation()
+    private void DefineAxes()       // Player rotation
     {
-        horizontal = Input.GetAxis("RightStickX") * rotateSpeed;  // direction and speed
-        vertical = Input.GetAxis("RightStickY") * rotateSpeed;
+            if (playerName == "Player 1(Clone)")
+            {
+                horizontalRotation = Input.GetAxis("Player1RotateX") * rotateSpeed;
+            }
+            else if (playerName == "Player 2(Clone)")
+            {
+                horizontalRotation = Input.GetAxis("Player2RotateX") * rotateSpeed;
+            }
+            else if (playerName == "Player 3(Clone)")
+            {
+                horizontalRotation = Input.GetAxis("Player3RotateX") * rotateSpeed;
+            }
+            else if (playerName == "Player 4(Clone)")
+            {
+                horizontalRotation = Input.GetAxis("Player4RotateX") * rotateSpeed;
+            }
 
-        /*float desiredAngle = target.transform.eulerAngles.y;    // facing player y
-        rotation = Quaternion.Euler(0, desiredAngle, 0);*/
     }
 
-    void setRotation()
+    void RotatePlayer()
     {
         //transform.position = target.transform.position - (rotation * offset);   // angle of camera:player
-        target.transform.Rotate(0, horizontal, 0);  
+        target.transform.Rotate(0, horizontalRotation, 0);  
 
         //transform.LookAt(target.transform);
     }
 
     void LateUpdate()
     {
-       for (int i = 0; i < menus.Length; i ++)
-       {
-            if (!menus[i].activeInHierarchy)
-            {
-                transform.rotation = target.transform.rotation;
-                transform.position = new Vector3(target.transform.position.x, target.transform.position.y + height, target.transform.position.z);
+        target = GameObject.Find(playerName);
+        DefineAxes();
 
-                getRotation();
-                setRotation();
-            }
-       }
+
+        for (int i = 0; i < menus.Length; i ++)
+        {
+             if (!menus[i].activeInHierarchy && target != null)     // make sure player moves when menus are closed
+             {
+                 transform.rotation = target.transform.rotation;
+                 transform.position = new Vector3(target.transform.position.x, target.transform.position.y + height, target.transform.position.z);
+
+                 DefineAxes();
+                 RotatePlayer();
+             }
+        }
     }
 }
