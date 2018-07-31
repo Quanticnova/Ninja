@@ -10,6 +10,7 @@ public class SpawnPlayers : MonoBehaviour {
     public static int playerCount = 1, maxPlayerCount = 4, controllerCount = 1;
 
     Vector3 spawnPoint = Vector3.zero;      // link to spawn script
+    public GameObject[] spawnPoints;
 
     void Start ()
     {
@@ -25,8 +26,16 @@ public class SpawnPlayers : MonoBehaviour {
             if (playerCount > 0 && playerCount <= maxPlayerCount)
             {
                 player.name = "Player " + playerCount;
-                Instantiate(player, Vector3.zero, Quaternion.identity);
+                spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
+                Instantiate(player, spawnPoint, Quaternion.identity);
                 playerCount++;
+            }
+            else if (playerCount >= maxPlayerCount)
+            {
+                transform.GetComponent<MenuSelect>().playersJoinBtn.gameObject.SetActive(false);
+                transform.GetComponent<MenuSelect>().playerPanel2.SetActive(false);
+                transform.GetComponent<MenuSelect>().playerPanel3.SetActive(false);
+                transform.GetComponent<MenuSelect>().playerPanel4.SetActive(false);
             }
         }
     }

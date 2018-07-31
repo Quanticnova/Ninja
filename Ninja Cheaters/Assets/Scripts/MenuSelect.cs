@@ -12,9 +12,13 @@ public class MenuSelect : MonoBehaviour {
     public static bool joinedGame;
 
     public GameObject playerPanel2, playerPanel3, playerPanel4;
+    public GameObject modeSelectMenu;
+
+    public Button playersJoinBtn;
 
     private void Start()
     {
+        modeSelectMenu.SetActive(true);
         playerPanel2.SetActive(false);
         playerPanel3.SetActive(false);
         playerPanel4.SetActive(false);
@@ -37,12 +41,39 @@ public class MenuSelect : MonoBehaviour {
         }
     }
 
-    private void OnClick()
+    private void OnClickPlayerMenu()
+    {
+        if (currentButton && Input.GetKeyDown(KeyCode.JoystickButton1))
+        {
+            if (!modeSelectMenu.activeInHierarchy)
+            {
+                Text buttonText = currentButton.GetComponentInChildren<Text>();
+                buttonText.text = "Joined";
+            }
+
+        }
+    }
+
+    public void OnPlayerModeSelect()
     {
         if (currentButton && Input.GetKeyDown(KeyCode.JoystickButton1))
         {
             Text buttonText = currentButton.GetComponentInChildren<Text>();
-            buttonText.text = "Joined";
+            if (buttonText.text == "2 Players")
+            {
+                playerPanel2.SetActive(true);
+                modeSelectMenu.SetActive(false);
+            }
+            else if (buttonText.text == "3 Players")
+            {
+                playerPanel3.SetActive(true);
+                modeSelectMenu.SetActive(false);
+            }
+            else if (buttonText.text == "4 Players")
+            {
+                playerPanel4.SetActive(true);
+                modeSelectMenu.SetActive(false);
+            }
         }
     }
 
@@ -51,14 +82,24 @@ public class MenuSelect : MonoBehaviour {
         if (playerPanel2.activeInHierarchy)
         {
             SpawnPlayers.maxPlayerCount = 2;
+            playersJoinBtn.gameObject.SetActive(true);
+            playersJoinBtn.Select();
         }
         else if (playerPanel3.activeInHierarchy)
         {
             SpawnPlayers.maxPlayerCount = 3;
+            playersJoinBtn.gameObject.SetActive(true);
+            playersJoinBtn.Select();
         }
         else if (playerPanel4.activeInHierarchy)
         {
             SpawnPlayers.maxPlayerCount = 4;
+            playersJoinBtn.gameObject.SetActive(true);
+            playersJoinBtn.Select();
+        }
+        else
+        {
+            playersJoinBtn.gameObject.SetActive(false);
         }
     }
 
@@ -66,6 +107,7 @@ public class MenuSelect : MonoBehaviour {
     {
         JoinPlayerMenu();
         SelectButtons();
-        OnClick();
+        OnClickPlayerMenu();
+        OnPlayerModeSelect();
     }
 }

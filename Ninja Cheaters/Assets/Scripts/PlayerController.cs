@@ -145,11 +145,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(SpawnPlayers.controllerCount == SpawnPlayers.playerCount)
-        {
             PlayerWalk();
             PlayerJump();
             PlayerRun();
-        }
     }
 }
