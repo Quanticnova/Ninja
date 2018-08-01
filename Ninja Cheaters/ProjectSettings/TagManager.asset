@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - P4Weapon
+  - P3Weapon
+  - P2Weapon
+  - P1Weapon
+  - P1
+  - P2
+  - P3
+  - P4
   layers:
   - Default
   - TransparentFX
@@ -14,10 +22,10 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
-  - 
-  - 
+  - P1
+  - P2
+  - P3
+  - p4
   - 
   - 
   - 
