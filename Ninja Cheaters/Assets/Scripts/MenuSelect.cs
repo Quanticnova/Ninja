@@ -15,6 +15,7 @@ public class MenuSelect : MonoBehaviour {
     public GameObject modeSelectMenu;
 
     public Button playersJoinBtn;
+    private int countXPresses = -1;
 
     private void Start()
     {
@@ -88,21 +89,22 @@ public class MenuSelect : MonoBehaviour {
     {
         if (playerPanel2.activeInHierarchy)
         {
+            Join();
             SpawnPlayers.maxPlayerCount = 2;
             sc_Camera_Split.numPlayers = 2;
-            Join();
+
         }
         else if (playerPanel3.activeInHierarchy)
         {
+            Join();
             SpawnPlayers.maxPlayerCount = 3;
             sc_Camera_Split.numPlayers = 3;
-            Join();
         }
         else if (playerPanel4.activeInHierarchy)
         {
+            Join();
             SpawnPlayers.maxPlayerCount = 4;
             sc_Camera_Split.numPlayers = 4;
-            Join();
         }
         else
         {
@@ -116,5 +118,27 @@ public class MenuSelect : MonoBehaviour {
         SelectButtons();
         OnClickPlayerMenu();
         OnPlayerModeSelect();
+
+        if (playersJoinBtn.enabled && Input.GetKeyDown(KeyCode.JoystickButton1))
+        {
+            countXPresses++;
+            if(countXPresses == 1)
+            {
+                playersJoinBtn.GetComponentInChildren<Text>().text = "Player 1 has joined";
+            }
+            else if(countXPresses == 2)
+            {
+                playersJoinBtn.GetComponentInChildren<Text>().text = "Player 2 has joined";
+            }
+            else if (countXPresses == 3)
+            {
+                playersJoinBtn.GetComponentInChildren<Text>().text = "Player 3 has joined";
+            }
+            else if (countXPresses == 4)
+            {
+                playersJoinBtn.GetComponentInChildren<Text>().text = "Player 4 has joined";
+                countXPresses = -1;
+            }
+        }
     }
 }

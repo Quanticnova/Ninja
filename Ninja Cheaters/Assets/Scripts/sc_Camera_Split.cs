@@ -17,12 +17,9 @@ public class sc_Camera_Split : MonoBehaviour
 
     public GameObject camDefault;
 
-    public GameObject gameManager;
-
     private void Start()
     {
         numPlayers = 3;
-        gameManager = GameObject.Find("Game Manager");
        // MakeCameras();
     }
 
