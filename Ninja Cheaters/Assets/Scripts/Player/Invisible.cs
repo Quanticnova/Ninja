@@ -34,7 +34,7 @@ public class Invisible : MonoBehaviour {
         collided = false;
         MyMesh = GetComponent<MeshRenderer>();
 
-      // gameObject.GetComponent<MeshRenderer>().enabled = false;
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
         enemyMaterials = GetComponent<MeshRenderer>().materials;
 
         rend = GetComponent<Renderer>();

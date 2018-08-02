@@ -41,7 +41,7 @@ public class AttackScript : MonoBehaviour {
             Body.enabled = true;
             targetAngle = new Vector3(0f, transform.rotation.x + 180, 0f);
             isAttacking = true;
-            scalingFramesLeft = 15;
+            scalingFramesLeft = 10;
             canAttack = false;
              Timer = Time.time + TimerBuffer;
            // targetAngle.x = transform.rotation.x + 180;
@@ -64,11 +64,12 @@ public class AttackScript : MonoBehaviour {
             scalingFramesLeft--;
             if(scalingFramesLeft == 0)
             {
+                Body.enabled = false;
                 transform.eulerAngles = new Vector3(0f, 0f, 0f);
                 currentAngle = new Vector3(0f, 0f, 0f);
                 Hilt.enabled = false;
                 Sword.enabled = false;
-                Body.enabled = false;
+                
             }
 
            

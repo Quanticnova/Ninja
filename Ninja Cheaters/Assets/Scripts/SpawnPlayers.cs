@@ -7,6 +7,7 @@ public class SpawnPlayers : MonoBehaviour {
 
     GameObject selectedButton;
     public GameObject player;
+    public GameObject[] Players;
     public static int playerCount = 1, maxPlayerCount = 4, controllerCount = 1;
 
     Vector3 spawnPoint = Vector3.zero;      // link to spawn script
@@ -25,9 +26,12 @@ public class SpawnPlayers : MonoBehaviour {
         {
             if (playerCount > 0 && playerCount <= maxPlayerCount)
             {
+                
                 player.name = "Player " + playerCount;
+                player.layer = 8 + playerCount;
                 spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
-                Instantiate(player, spawnPoint, Quaternion.identity);
+                //Instantiate(player, spawnPoint, Quaternion.identity);
+                Instantiate(Players[playerCount - 1], spawnPoint, Quaternion.identity);//Set players 1 to 4
                 playerCount++;
             }
             else if (playerCount >= maxPlayerCount)
