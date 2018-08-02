@@ -26,6 +26,7 @@ public class SpawnPlayers : MonoBehaviour {
             if (playerCount > 0 && playerCount <= maxPlayerCount)
             {
                 player.name = "Player " + playerCount;
+                player.layer = 8 + playerCount;
                 spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
                 Instantiate(player, spawnPoint, Quaternion.identity);
                 playerCount++;

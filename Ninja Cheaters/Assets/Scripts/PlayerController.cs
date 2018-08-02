@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
     {
         if (player.name == "Player 1(Clone)")
         {
-            if (Input.GetKey(KeyCode.Joystick1Button1))
+            if (Input.GetKey(KeyCode.Joystick1Button1))     // Square
             {
                 Jump();
             }
