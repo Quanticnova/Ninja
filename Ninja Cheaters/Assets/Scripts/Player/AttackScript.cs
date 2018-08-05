@@ -18,14 +18,16 @@ public class AttackScript : MonoBehaviour {
     private Vector3 currentAngle;
 
     public MeshRenderer Hilt;
-    public MeshRenderer Sword;
+    //public MeshRenderer Sword;
     public MeshCollider Body;
+    AudioSource attackSound;
 
     public void Start()
     {
         currentAngle = transform.eulerAngles;
+        attackSound = GetComponent<AudioSource>();
         Hilt.enabled = false;
-        Sword.enabled = false;
+        //Sword.enabled = false;
         Body.enabled = false;
     }
 
@@ -36,8 +38,9 @@ public class AttackScript : MonoBehaviour {
 
         if(Input.GetKeyDown(KeyCode.S) && canAttack)
         {
+            attackSound.Play();
             Hilt.enabled = true;
-            Sword.enabled = true;
+           // Sword.enabled = true;
             Body.enabled = true;
             targetAngle = new Vector3(0f, transform.rotation.x + 180, 0f);
             isAttacking = true;
@@ -68,7 +71,7 @@ public class AttackScript : MonoBehaviour {
                 transform.eulerAngles = new Vector3(0f, 0f, 0f);
                 currentAngle = new Vector3(0f, 0f, 0f);
                 Hilt.enabled = false;
-                Sword.enabled = false;
+               // Sword.enabled = false;
                 
             }
 

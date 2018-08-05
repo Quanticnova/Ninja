@@ -26,6 +26,8 @@ public class Invisible : MonoBehaviour {
     Material myMaterial;
     public MeshRenderer MyMesh;
 
+    AudioSource deathAudio;
+    public GameObject Deathparticles;
     void Start ()
     {
         BaseMat = GetComponent<Material>();//Changing mat properties
@@ -38,6 +40,8 @@ public class Invisible : MonoBehaviour {
         enemyMaterials = GetComponent<MeshRenderer>().materials;
 
         rend = GetComponent<Renderer>();
+
+        deathAudio = GetComponent<AudioSource>();
         //rend.material = BaseMat;
     }
 
@@ -103,33 +107,66 @@ public class Invisible : MonoBehaviour {
 
     public void OnCollisionEnter(Collision col)
     {
-        if(col.gameObject.layer != gameObject.layer)//Check is attacked
-        {
+       
+           
             if (col.gameObject.tag == "P1Weapon")
             {
-                print(collided);
+               // print(collided);
                 collided = true;
                 TheScoreManager.P1ScoreCount += 1;
+                deathAudio.Play();
+                respawn();
+
             }
 
             if (col.gameObject.tag == "P2Weapon")
             {
                 collided = true;
                 TheScoreManager.P2ScoreCount += 1;
+                deathAudio.Play();
+                respawn();
             }
 
             if (col.gameObject.tag == "P3Weapon")
             {
                 collided = true;
                 TheScoreManager.P3ScoreCount += 1;
+                deathAudio.Play();
+                respawn();
             }
 
             if (col.gameObject.tag == "P4Weapon")
             {
                 collided = true;
                 TheScoreManager.P4ScoreCount += 1;
+                deathAudio.Play();
+                respawn();
             }
-        }
+        
       
+    }
+
+    void respawn()
+    {
+
+        int spawnSeed = Random.Range(0, 3);
+
+        Instantiate(Deathparticles, gameObject.transform.transform.position, Quaternion.identity);
+        if (spawnSeed == 0)
+        {
+            gameObject.transform.position = new Vector3(1.13f, -2f, -3.7f);
+        }
+        else if (spawnSeed == 1)
+        {
+            gameObject.transform.position = new Vector3(-12.3f, -2f, -5.3f);
+        }
+        else if (spawnSeed == 2)
+        {
+            gameObject.transform.position = new Vector3(1.3f, -2f, 24.8f);
+        }
+        else if (spawnSeed == 3)
+        {
+            gameObject.transform.position = new Vector3(16.6f, -2f, 24.3f);
+        }
     }
 }

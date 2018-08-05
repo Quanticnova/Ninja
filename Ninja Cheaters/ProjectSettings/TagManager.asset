@@ -12,6 +12,7 @@ TagManager:
   - P2
   - P3
   - P4
+  - playerSelect
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - P2
   - P3
   - p4
-  - 
+  - Trail
   - 
   - 
   - 

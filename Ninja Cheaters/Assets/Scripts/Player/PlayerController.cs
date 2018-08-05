@@ -13,9 +13,13 @@ public class PlayerController : MonoBehaviour
     bool isGrounded;
 
     public GameObject player;
+    [SerializeField]
     private Rigidbody playerRb;
 
     private GameObject[] menus;
+
+    public GameObject Trail;
+    public float trailtime;
 
     private void Walk()
     {
@@ -26,6 +30,12 @@ public class PlayerController : MonoBehaviour
         strafe *= Time.deltaTime;
 
         player.transform.Translate(strafe, 0, translation);
+        trailtime += Time.deltaTime;
+        if (trailtime >= 0.75)
+        {
+            Instantiate(Trail, gameObject.transform.position, Quaternion.identity);
+            trailtime = 0;
+        }
     }
 
     void PlayerWalk()
@@ -141,8 +151,9 @@ public class PlayerController : MonoBehaviour
     {
         startWalkSpeed = walkSpeed;
 
-       // player = GameObject.FindGameObjectWithTag("Player");
-        playerRb = player.GetComponent<Rigidbody>();
+        // player = GameObject.FindGameObjectWithTag("Player");
+        playerRb = GetComponent<Rigidbody>();
+        //playerRb = player.GetComponent<Rigidbody>();
         menus = GameObject.FindGameObjectsWithTag("playerSelect");
     }
 
