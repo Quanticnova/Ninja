@@ -645,12 +645,13 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
+    Collab: 1
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: ae06d89b-153f-44a8-8f13-9669856b0e20
-  projectName: Ninja Cheaters (1)
-  organizationId: nandi37
+  cloudProjectId: ba1407a2-e8d6-4d84-b176-02220a4ddd2a
+  projectName: Ninja Cheaters
+  organizationId: quanticnova
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
